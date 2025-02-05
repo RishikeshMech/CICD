@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "rishikesh698/python-app:${env.BUILD_NUMBER}"
-        KUBE_CONFIG = "--kubeconfig=/var/lib/jenkins/.kube/config"
+        KUBE_CONFIG = "--kubeconfig=/var/jenkins_home/.kube/config"
     }
 
     stages {
@@ -24,7 +24,7 @@ pipeline {
         stage('Scan Docker Image with Trivy') {
             steps {
                 script {
-                    sh "trivy image --exit-code 1 --severity CRITICAL ${DOCKER_IMAGE}"
+                    sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --exit-code 1 --severity CRITICAL ${DOCKER_IMAGE}"
                 }
             }
         }
