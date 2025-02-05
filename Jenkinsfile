@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "your-dockerhub-username/python-app:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "rishikesh698/python-app:${env.BUILD_NUMBER}"
         KUBE_CONFIG = "--kubeconfig=/var/lib/jenkins/.kube/config"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+                git branch: 'main', url: 'https://github.com/RishikeshMech/CICD.git'
             }
         }
 
